@@ -43,28 +43,31 @@ class ClassifierModel:
             self.load_network(opt.which_epoch)
 
     def set_input(self, data):
-        input_edge_features = torch.from_numpy(data['edge_features']).float()
+        input_edge_features1 = torch.from_numpy(data['edge_features1']).float()
+        input_edge_features2 = torch.from_numpy(data['edge_features2']).float()
         labels = torch.from_numpy(data['label']).long()
         # set inputs
-        self.edge_features = input_edge_features.to(self.device).requires_grad_(self.is_train)
+        self.edge_features1 = input_edge_features1.to(self.device).requires_grad_(self.is_train)
+        self.edge_features2 = input_edge_features2.to(self.device).requires_grad_(self.is_train)
         self.labels = labels.to(self.device)
-        self.mesh = data['mesh']
+        self.mesh1 = data['mesh1']
+        self.mesh2 = data['mesh2']
         if self.opt.dataset_mode == 'segmentation' and not self.is_train:
             self.soft_label = torch.from_numpy(data['soft_label'])
 
-
     def forward(self):
-        out = self.net(self.edge_features, self.mesh)
-        return out
+        out1 = self.net(self.edge_features1, self.mesh1)
+        out2 = self.net(self.edge_features2, self.mesh2)
+        return out1, out2
 
-    def backward(self, out):
-        self.loss = self.criterion(out, self.labels)
+    def backward(self, out1, out2):
+        self.loss = self.criterion(out1, out2)
         self.loss.backward()
 
     def optimize_parameters(self):
         self.optimizer.zero_grad()
-        out = self.forward()
-        self.backward(out)
+        out1, out2 = self.forward()
+        self.backward(out1, out2)
         self.optimizer.step()
 
 
@@ -98,7 +101,7 @@ class ClassifierModel:
 
     def update_learning_rate(self):
         """update learning rate (called once every epoch)"""
-        self.scheduler.step()
+        #self.scheduler.step()
         lr = self.optimizer.param_groups[0]['lr']
         print('learning rate = %.7f' % lr)
 
@@ -107,13 +110,13 @@ class ClassifierModel:
         returns: number correct and total number
         """
         with torch.no_grad():
-            out = self.forward()
+            out1, out2 = self.forward()
             # compute number of correct
-            pred_class = out.data.max(1)[1]
-            label_class = self.labels
-            self.export_segmentation(pred_class.cpu())
-            correct = self.get_accuracy(pred_class, label_class)
-        return correct, len(label_class)
+            # pred_class = out.data.max(1)[1]
+            # label_class = self.labels
+            # self.export_segmentation(pred_class.cpu())
+            # correct = self.get_accuracy(pred_class, label_class)
+        return self.criterion(out1, out2) #correct, len(label_class)
 
     def get_accuracy(self, pred, labels):
         """computes accuracy for classification / segmentation """

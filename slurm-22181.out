@@ -1,0 +1,118 @@
+tensorboard X not installed, visualizing wont be available
+------------ Options -------------
+arch: mconvnet
+batch_size: 32
+beta1: 0.9
+checkpoints_dir: ./checkpoints
+continue_train: False
+dataroot: datasets/human_seg
+dataset_mode: classification
+epoch_count: 1
+export_folder: 
+fc_n: 128
+flip_edges: 0.05
+gpu_ids: [0]
+init_gain: 0.02
+init_type: normal
+is_train: True
+lr: 0.0002
+lr_decay_iters: 50
+lr_policy: lambda
+max_dataset_size: inf
+name: human_seg
+ncf: [32, 64, 128]
+ninput_edges: 2280
+niter: 100
+niter_decay: 0
+no_vis: True
+norm: group
+num_aug: 20
+num_groups: 16
+num_threads: 3
+phase: train
+pool_res: [1800, 1350, 600]
+print_freq: 10
+resblocks: 3
+run_test_freq: 1
+save_epoch_freq: 1
+save_latest_freq: 250
+scale_verts: False
+seed: None
+serial_batches: False
+slide_verts: 0.2
+verbose_plot: False
+which_epoch: latest
+-------------- End ----------------
+loaded mean / std from cache
+#training meshes = 381
+---------- Network initialized -------------
+[Network] Total number of parameters : 0.401 M
+-----------------------------------------------
+saving the latest model (epoch 1, total_steps 32)
+(epoch: 1, iters: 160, time: 0.492, data: 1.021) loss: 3.912 
+(epoch: 1, iters: 320, time: 0.487, data: 0.117) loss: 3.803 
+saving the model at the end of epoch 1, iters 352
+End of epoch 1 / 100 	 Time Taken: 179 sec
+learning rate = 0.0002000
+saving the latest model (epoch 2, total_steps 384)
+(epoch: 2, iters: 128, time: 0.485, data: 0.080) loss: 3.610 
+(epoch: 2, iters: 288, time: 0.487, data: 0.000) loss: 3.300 
+saving the model at the end of epoch 2, iters 704
+End of epoch 2 / 100 	 Time Taken: 176 sec
+learning rate = 0.0002000
+saving the latest model (epoch 3, total_steps 736)
+(epoch: 3, iters: 96, time: 0.489, data: 0.192) loss: 3.266 
+(epoch: 3, iters: 256, time: 0.492, data: 0.129) loss: 3.249 
+saving the model at the end of epoch 3, iters 1056
+End of epoch 3 / 100 	 Time Taken: 178 sec
+learning rate = 0.0002000
+saving the latest model (epoch 4, total_steps 1088)
+(epoch: 4, iters: 64, time: 0.512, data: 0.000) loss: 3.179 
+(epoch: 4, iters: 224, time: 0.483, data: 0.118) loss: 3.183 
+saving the model at the end of epoch 4, iters 1408
+End of epoch 4 / 100 	 Time Taken: 178 sec
+learning rate = 0.0002000
+(epoch: 5, iters: 32, time: 0.501, data: 0.126) loss: 3.229 
+saving the latest model (epoch 5, total_steps 1440)
+(epoch: 5, iters: 192, time: 0.487, data: 0.082) loss: 3.108 
+(epoch: 5, iters: 352, time: 0.498, data: 0.128) loss: 3.121 
+saving the model at the end of epoch 5, iters 1760
+End of epoch 5 / 100 	 Time Taken: 175 sec
+learning rate = 0.0002000
+saving the latest model (epoch 6, total_steps 1792)
+(epoch: 6, iters: 160, time: 0.506, data: 1.457) loss: 3.073 
+(epoch: 6, iters: 320, time: 0.498, data: 0.000) loss: 3.112 
+saving the model at the end of epoch 6, iters 2112
+End of epoch 6 / 100 	 Time Taken: 175 sec
+learning rate = 0.0002000
+saving the latest model (epoch 7, total_steps 2144)
+(epoch: 7, iters: 128, time: 0.485, data: 0.072) loss: 3.136 
+(epoch: 7, iters: 288, time: 0.492, data: 0.205) loss: 3.056 
+saving the model at the end of epoch 7, iters 2464
+End of epoch 7 / 100 	 Time Taken: 175 sec
+learning rate = 0.0002000
+saving the latest model (epoch 8, total_steps 2496)
+(epoch: 8, iters: 96, time: 0.487, data: 0.062) loss: 3.028 
+(epoch: 8, iters: 256, time: 0.483, data: 0.122) loss: 2.998 
+saving the model at the end of epoch 8, iters 2816
+End of epoch 8 / 100 	 Time Taken: 178 sec
+learning rate = 0.0002000
+saving the latest model (epoch 9, total_steps 2848)
+(epoch: 9, iters: 64, time: 0.493, data: 0.000) loss: 3.008 
+(epoch: 9, iters: 224, time: 0.489, data: 0.000) loss: 3.093 
+saving the model at the end of epoch 9, iters 3168
+End of epoch 9 / 100 	 Time Taken: 177 sec
+learning rate = 0.0002000
+(epoch: 10, iters: 32, time: 0.485, data: 0.131) loss: 3.046 
+saving the latest model (epoch 10, total_steps 3200)
+(epoch: 10, iters: 192, time: 0.487, data: 0.000) loss: 3.032 
+(epoch: 10, iters: 352, time: 0.486, data: 0.207) loss: 3.020 
+saving the model at the end of epoch 10, iters 3520
+End of epoch 10 / 100 	 Time Taken: 176 sec
+learning rate = 0.0002000
+saving the latest model (epoch 11, total_steps 3552)
+(epoch: 11, iters: 160, time: 0.481, data: 1.433) loss: 2.998 
+(epoch: 11, iters: 320, time: 0.481, data: 0.000) loss: 2.998 
+saving the model at the end of epoch 11, iters 3872
+End of epoch 11 / 100 	 Time Taken: 175 sec
+learning rate = 0.0002000

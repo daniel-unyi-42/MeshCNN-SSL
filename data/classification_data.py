@@ -14,7 +14,7 @@ class ClassificationData(BaseDataset):
         self.dir = os.path.join(opt.dataroot)
         self.classes, self.class_to_idx = self.find_classes(self.dir)
         self.paths = self.make_dataset_by_class(self.dir, self.class_to_idx, opt.phase)
-        self.nclasses = len(self.classes)
+        self.nclasses = 64 #len(self.classes)
         self.size = len(self.paths)
         self.get_mean_std()
         # modify for network later.
@@ -24,12 +24,19 @@ class ClassificationData(BaseDataset):
     def __getitem__(self, index):
         path = self.paths[index][0]
         label = self.paths[index][1]
-        mesh = Mesh(file=path, opt=self.opt, hold_history=False, export_folder=self.opt.export_folder)
-        meta = {'mesh': mesh, 'label': label}
+        # two views of the same mesh
+        mesh1 = Mesh(file=path, opt=self.opt, hold_history=False, export_folder=self.opt.export_folder)
+        mesh2 = Mesh(file=path, opt=self.opt, hold_history=False, export_folder=self.opt.export_folder)
+
+        meta = {'mesh1': mesh1, 'mesh2': mesh2, 'label': label}
         # get edge features
-        edge_features = mesh.extract_features()
-        edge_features = pad(edge_features, self.opt.ninput_edges)
-        meta['edge_features'] = (edge_features - self.mean) / self.std
+        edge_features1 = mesh1.extract_features()
+        edge_features2 = mesh2.extract_features()
+        edge_features1 = pad(edge_features1, self.opt.ninput_edges)
+        edge_features2 = pad(edge_features2, self.opt.ninput_edges)
+        meta['edge_features1'] = (edge_features1 - self.mean) / self.std
+        meta['edge_features2'] = (edge_features2 - self.mean) / self.std
+        #print('ITEM IS REQUESTED!', index)
         return meta
 
     def __len__(self):
